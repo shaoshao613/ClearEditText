@@ -56,7 +56,9 @@ public class ClearEditText extends EditText implements
 						- getPaddingRight() - mClearDrawable.getIntrinsicWidth())
 						&& (event.getX() < ((getWidth() - getPaddingRight())));
 				if (touchable) {
+					boolean returnValue=super.onTouchEvent(event);
 					this.setText("");
+					return returnValue;
 				}
 			}
 		}
