@@ -107,7 +107,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "dsfdsf"
+        name = projectName
         websiteUrl = projectSiteUrl
         vcsUrl = projectGitUrl
         licenses = ["Apache-2.0"]

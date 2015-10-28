@@ -1,14 +1,17 @@
 ﻿<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="36dp"
-    android:height="36dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:width="28dp"
+    android:height="28dp"
     android:viewportWidth="36"
-    android:viewportHeight="36">
+    android:viewportHeight="36"
+        tools:ignore="NewApi">
 
     <path
         android:fillColor="#fafbfb"
         android:pathData="M 0.00 0 L 36.00 0.00 L 36.00 36.00 L 0.00 36.00 L 0.00 0.00 Z" />
     <path
-        android:fillColor="#FF4081"
+        android:name="circle_color"
+        android:fillColor="#aeaeae"
         android:pathData="M 14.29 3.50
         C 22.34 1.04 31.53 6.73 32.98 15.00
         C 34.91 23.23 28.54 32.09 20.14 32.90

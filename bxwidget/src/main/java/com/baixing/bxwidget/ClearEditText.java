@@ -7,27 +7,21 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.CycleInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
 import com.telly.mrvector.MrVector;
 
 public class ClearEditText extends EditText implements
 		View.OnFocusChangeListener, TextWatcher {
-	/**
-	 * 删除按钮的引用
-	 */
-	private Drawable mClearDrawable;
+
+	private static Drawable mClearDrawable;// 设置为static,出现多个，只占用一个资源
 
 	public ClearEditText(Context context) {
 		this(context, null);
 	}
 
 	public ClearEditText(Context context, AttributeSet attrs) {
-		//这里构造方法也很重要，不加这个很多属性不能再XML里面定义
-		super(context,attrs);
+		super(context, attrs);
 		init();
 	}
 
@@ -43,7 +37,6 @@ public class ClearEditText extends EditText implements
 		if (mClearDrawable == null) {
 			mClearDrawable = MrVector.inflate(getResources(), R.drawable.ic_clear);
 		}
-		mClearDrawable.setBounds(-5, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
 		setClearIconVisible(false);
 		setOnFocusChangeListener(this);
 		addTextChangedListener(this);
@@ -90,6 +83,9 @@ public class ClearEditText extends EditText implements
 	 * @param visible
 	 */
 	protected void setClearIconVisible(boolean visible) {
+		//大小根据行高调节
+		if(mClearDrawable!=null)
+			mClearDrawable.setBounds(-5, 0, getLineHeight(),getLineHeight());
 		Drawable right = visible ? mClearDrawable : null;
 		setCompoundDrawables(getCompoundDrawables()[0],
 				getCompoundDrawables()[1], right, getCompoundDrawables()[3]);
@@ -114,28 +110,6 @@ public class ClearEditText extends EditText implements
 	@Override
 	public void afterTextChanged(Editable s) {
 
-	}
-
-
-	/**
-	 * 设置晃动动画
-	 */
-	public void setShakeAnimation() {
-		this.setAnimation(shakeAnimation(5));
-	}
-
-
-	/**
-	 * 晃动动画
-	 *
-	 * @param counts 1秒钟晃动多少下
-	 * @return
-	 */
-	public static Animation shakeAnimation(int counts) {
-		Animation translateAnimation = new TranslateAnimation(0, 10, 0, 0);
-		translateAnimation.setInterpolator(new CycleInterpolator(counts));
-		translateAnimation.setDuration(1000);
-		return translateAnimation;
 	}
 
 
